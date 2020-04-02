@@ -1,0 +1,54 @@
+.banner,
+.banner > * {
+  --text-lite: #373743;
+  --text-norm: #242331;
+  --text-bold: #0e0d12;
+
+  --accent-lite: #b28a59;
+  --accent-norm: #a27035;
+  --accent-bold: #684822;
+
+  --primary-lite: #e3d394;
+  --primary-norm: #ddca7d;
+  --primary-bold: #c9b872;
+}
+
+.banner {
+  width: 100vw;
+  z-index: 1;
+  min-height: 1rem;
+  padding: 0.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+
+  background-color: var(--primary-lite);
+  border-bottom: 1px solid var(--accent-lite);
+  color: var(--text-lite);
+  user-select: none;
+}
+
+.banner:hover {
+  transition: background-color ease-in 100ms;
+
+  background-color: var(--primary-norm);
+  border-bottom: 1px solid var(--accent-norm);
+  color: var(--text-norm);
+}
+
+.banner:active {
+  background-color: var(--primary-bold);
+  border-bottom: 1px solid var(--accent-bold);
+  color: var(--text-bold);
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 500ms ease;
+  text-align: center;
+  width: 1rem;
+  height: 1rem;
+}
+.arrow.expanded {
+  transform-origin: center;
+  transform: rotate(90deg);
+}
