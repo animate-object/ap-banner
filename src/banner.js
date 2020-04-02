@@ -35,7 +35,6 @@ const STYLES = `.banner,
   background-color: var(--primary-lite);
   border-bottom: 1px solid var(--accent-lite);
   color: var(--text-lite);
-  user-select: none;
 }
 
 .banner:hover {
@@ -85,18 +84,16 @@ const STYLES = `.banner,
 
 .more-info {
   position: relative;
-  padding-left: 16px;
+  padding: 0 16px;
   max-height: 0;
-  overflow: hidden;
   transition: max-height ease-in-out 250ms;
   font-size: var(--font-md);
+  overflow: hidden;
 }
 
 .more-info.expanded {
-  margin-top: 0.25rem;
-  padding-top: 0.25rem;
-  max-height: 10rem;
-  overflow: auto;
+  padding: 16px;
+  max-height: 100vh;
 }
 
 .action-link {
