@@ -4,8 +4,16 @@
     <script type="text/javascript" src="./assets/banner.js" defer></script>
   </head>
   <body style="margin:0">
-    <ap-banner title="Here's a banner with some information about this page"
-      ><p>hello <a href="google.com">go to google now</a></p></ap-banner
+    <ap-banner
+      title="This project demonstrates banner I made with web components"
+      source="https://github.com/animate-object"
+      ><span slot="more-info"
+        >The WebComponent standard enables developers to create their own
+        reusable markup that can be consumed like regular html elements.
+        Combined with HTML5 templates, you can even create web components that
+        can render custom children (like this content!). Learn more at
+        <a href="https://alexprinsen.com">my website</a></span
+      ></ap-banner
     >
   </body>
 </html>
