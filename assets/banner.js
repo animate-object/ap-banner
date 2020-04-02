@@ -101,18 +101,22 @@ class ApBanner extends HTMLElement {
     const anchor = document.createElement("a");
     anchor.classList.add("action-link");
     anchor.classList.add("source-link");
-    anchor.textContent = "view source code";
+    anchor.textContent = "project source code";
     anchor.setAttribute("href", this.getAttribute("source"));
     anchor.setAttribute("target", "_blank");
-    return anchor;
+    const container = document.createElement("div");
+    container.appendChild(anchor);
+    return container;
   };
 
   closeForeverLink = () => {
     const anchor = document.createElement("a");
     anchor.classList.add("action-link");
     anchor.classList.add("close-link");
-    anchor.textContent = "don't show me this again";
-    return anchor;
+    anchor.textContent = "hide this";
+    const container = document.createElement("div");
+    container.appendChild(anchor);
+    return container;
   };
 
   updateArrowEl = el => {

@@ -4,13 +4,13 @@
   --text-norm: #242331;
   --text-bold: #0e0d12;
 
-  --accent-lite: #b28a59;
-  --accent-norm: #a27035;
-  --accent-bold: #684822;
+  --primary-lite: #fefefe;
+  --primary-norm: #fafafa;
+  --primary-bold: #efefef;
 
-  --primary-lite: #e3d394;
-  --primary-norm: #ddca7d;
-  --primary-bold: #c9b872;
+  --accent-lite: #8b8bfa;
+  --accent-norm: #4838ff;
+  --accent-bold: #3300ff;
 }
 
 .banner {
@@ -21,7 +21,7 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
 
-  font-size: 14px;
+  font-size: 16px;
 
   background-color: var(--primary-lite);
   border-bottom: 1px solid var(--accent-lite);
@@ -46,6 +46,10 @@
 .title-container {
   display: flex;
   justify-content: space-between;
+}
+
+.expansion-handle {
+  margin-right: 0.25px;
 }
 
 .expansion-handle {
@@ -75,7 +79,6 @@
   height: 0;
   overflow: hidden;
   transition: height ease-in-out 250ms;
-  font-size: 12px;
 }
 
 .more-info.expanded {
@@ -87,7 +90,12 @@
 }
 
 .action-link {
-  font-size: 10px;
+  font-size: 14px;
+}
+
+.link-container {
+  display: flex;
+  flex-shrink: 0;
 }
 
 .link-container > *:not(:last-child) {
