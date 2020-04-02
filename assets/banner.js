@@ -10,7 +10,7 @@ const LOCAL_STORAGE_KEY_PREFIX = "ap-banner-cached-state";
 
 const storageKey = item => `${LOCAL_STORAGE_KEY_PREFIX}.${item}`;
 
-class ApBanner extends HTMLElement {
+export class ApBanner extends HTMLElement {
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: "closed" });
@@ -19,6 +19,9 @@ class ApBanner extends HTMLElement {
       hidden: localStorage.getItem(storageKey("hidden")) === "true"
     });
     if (!this.getState().hidden) {
+      console.debug(
+        "ap-banner has been hidden by the user -- to see it again, clear your cache"
+      );
       this.firstDraw();
       this.update();
     }
@@ -189,5 +192,3 @@ class ApBanner extends HTMLElement {
     return template;
   };
 }
-
-customElements.define("ap-banner", ApBanner);
