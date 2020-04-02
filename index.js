@@ -1,8 +1,8 @@
-import { ApBanner } from "./assets/banner";
+import { ApBanner } from "./src/banner.js";
 
 if (window && "customElements" in window) {
-  console.debug("Register ap-banner web component");
+  console.debug("registering ap-banner web component");
   window.customElements.define("ap-banner", ApBanner);
 } else {
-  console.warn("Custom elements not supported, ap-banner cannot render");
+  console.warn("custom elements not supported, ap-banner cannot render");
 }

@@ -5,6 +5,126 @@
 // x banner content is provided by consumer
 // - banner is disimissable, and won't appear again on page load once dismissed
 
+const STYLES = `.banner,
+.banner > * {
+  --text-lite: #373743;
+  --text-norm: #242331;
+  --text-bold: #0e0d12;
+
+  --primary-lite: #fefefe;
+  --primary-norm: #fafafa;
+  --primary-bold: #efefef;
+
+  --accent-lite: #8b8bfa;
+  --accent-norm: #4838ff;
+  --accent-bold: #3300ff;
+
+  --font-lg: 1.2rem;
+  --font-md: 1rem;
+}
+
+.banner {
+  width: 100vw;
+  z-index: 1;
+  padding: 0.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+
+  font-size: var(--font-lg);
+
+  background-color: var(--primary-lite);
+  border-bottom: 1px solid var(--accent-lite);
+  color: var(--text-lite);
+  user-select: none;
+}
+
+.banner:hover {
+  transition: background-color ease-in 100ms;
+
+  background-color: var(--primary-norm);
+  border-bottom: 1px solid var(--accent-norm);
+  color: var(--text-norm);
+}
+
+.banner:active {
+  background-color: var(--primary-bold);
+  border-bottom: 1px solid var(--accent-bold);
+  color: var(--text-bold);
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.expansion-handle {
+  margin-right: 0.25px;
+}
+
+.expansion-handle {
+  padding-right: 0.5rem;
+  transition: background-color ease-in 100ms;
+}
+
+.expansion-handle:hover {
+  background-color: var(--primary-bold);
+  border-radius: 4px;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 500ms ease;
+  text-align: center;
+  width: var(--font-lg);
+  height: var(--font-lg);
+}
+.arrow.expanded {
+  transform-origin: center;
+  transform: rotate(90deg);
+}
+
+.more-info {
+  position: relative;
+  padding-left: 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height ease-in-out 250ms;
+  font-size: var(--font-md);
+}
+
+.more-info.expanded {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+  max-height: 10rem;
+  overflow: auto;
+}
+
+.action-link {
+  font-size: var(--font-md);
+}
+
+.link-container {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.link-container > *:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.link-container:last-child {
+  margin-right: 0.25rem;
+}
+
+a,
+a:visited {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: blue;
+  color: blue;
+}
+`;
+
 const BANNER_TEMPLATE_ID = "ap-banner-template";
 const LOCAL_STORAGE_KEY_PREFIX = "ap-banner-cached-state";
 
@@ -19,11 +139,12 @@ export class ApBanner extends HTMLElement {
       hidden: localStorage.getItem(storageKey("hidden")) === "true"
     });
     if (!this.getState().hidden) {
+      this.firstDraw();
+      this.update();
+    } else {
       console.debug(
         "ap-banner has been hidden by the user -- to see it again, clear your cache"
       );
-      this.firstDraw();
-      this.update();
     }
   }
 
@@ -87,10 +208,9 @@ export class ApBanner extends HTMLElement {
   };
 
   styles = () => {
-    const linkEl = document.createElement("link");
-    linkEl.setAttribute("rel", "stylesheet");
-    linkEl.setAttribute("href", "./assets/banner.css");
-    return linkEl;
+    const style = document.createElement("style");
+    style.textContent = STYLES;
+    return style;
   };
 
   arrow = () => {
@@ -161,7 +281,7 @@ export class ApBanner extends HTMLElement {
     primaryContent.appendChild(this.arrow());
     primaryContent.appendChild(this.title());
 
-    const linkContainer = document.createElement("links");
+    const linkContainer = document.createElement("div");
     linkContainer.setAttribute("class", "link-container");
     linkContainer.appendChild(this.sourceCodeLink());
     linkContainer.appendChild(this.closeForeverLink());
