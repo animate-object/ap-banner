@@ -58,6 +58,7 @@ const STYLES = `.banner,
 
 .expansion-handle {
   margin-right: 0.25px;
+  cursor: pointer;
 }
 
 .expansion-handle {
