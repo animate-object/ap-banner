@@ -24,7 +24,7 @@ const STYLES = `.banner,
 }
 
 .banner {
-  width: 100vw;
+  width: 100%;
   z-index: 1;
   padding: 0.25rem;
   font-family: Arial, Helvetica, sans-serif;
