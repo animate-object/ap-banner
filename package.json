@@ -5,7 +5,7 @@
   "homepage": "https://github.com/animate-object/ap-banner",
   "main": "index.js",
   "scripts": {
-    "publish": "gh-pages -d public"
+    "publishSite": "gh-pages -d public"
   },
   "repository": {
     "type": "git",
