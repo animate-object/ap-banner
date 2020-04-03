@@ -5,7 +5,22 @@
       type="module"
       src="https://unpkg.com/ap-banner@0.0.6/index.js"
     ></script>
-    <script type="module" src="./index.js"></script>
+    <style>
+      ap-banner:not(:defined) {
+        opacity: 0;
+      }
+      ap-banner:defined {
+        opacity: 1;
+      }
+
+      .code-block {
+        font-size: 1rem;
+        font-family: "Courier New", Courier, monospace;
+        background-color: #dedede;
+        border-radius: 2px;
+      }
+    </style>
+    <!-- <script type="module" src="./index.js"></script> -->
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   </head>
   <body style="margin:0">
@@ -13,14 +28,107 @@
       title="This project demonstrates banner I made with web components"
       source="https://github.com/animate-object/ap-banner"
       ><span slot="more-info"
-        >The WebComponent standard enables developers to create their own
-        reusable markup that can be consumed like regular html elements.
-        Combined with HTML5 templates, you can even create web components that
-        can render custom children (like this content!). There are some neat
-        libraries that make it easier to author web components with best
-        practices however I built this one with DOM apis to get a better feel
-        for what is going on under the hood.</span
+        >You can expand the banner to see some more info. You can click the link
+        on the far right to hide it. It will stay hidden after you refresh,
+        until you clear your browser cache. My intention is to place this banner
+        at the top of some of my projects to explain some detail about their
+        design.</span
       ></ap-banner
     >
+    <div style="padding: 1em;">
+      <h3>Checking out WebComponents</h3>
+      The banner at the top of this page is a simple WebComponent. I built it
+      with DOM APIs alone to get a better understanding of the spec. I'm going
+      to share some of what I learned, including pain points, and rounding out
+      with good stuff.
+
+      <br /><br />
+      <h4>Web Components 101</h4>
+      WebComponents are actually the combination of several different Web
+      platform technologies (custom elements, shadow DOM, ESM, and
+      templates/slots) aimed at enabling greater code reuse with native browser
+      APIs.
+      <br /><br />Here's some of the big ideas behind the WebComponent spec:
+      <ul>
+        <li>
+          developers can create <b>custom html elements</b> that can be reused
+          like regular tags
+        </li>
+        <li>
+          these elements can ship with their own styling through a 'shadow dom',
+          an encapsulated sub tree that serves as the root of the element
+        </li>
+        <li>
+          complex, customizable components can be created by combining custom
+          elements with &lt;template/&gt; and &lt;slot/&gt;
+        </li>
+      </ul>
+      <h4>Pain points</h4>
+      One thing I learned from this project is that I don't think I'd ever build
+      production WebComponents with DOM APIs alone. Your options for describing
+      the internal structure of your component are to 1) use the cumbersome
+      imperative DOM creation APIs or 2) use innerHtml.
+      <br /><br />
+      In defense of the spec, I don't think anyone is recommending these
+      approaches. There are a number of libraries (bordering on frameworks) that
+      make building WebComponent as breezy as authoring apps in React.
+      <br /><br />
+      Another problem is the Flash of unstyle Content that seems tricky to avoid
+      -- when your WebComponent is loading asynchronously (possibly from a CDN),
+      templated content may appear unstyled before flashing into place when the
+      component has mounted. One option to mitigate this is to use some styling
+      on your host page like this:
+      <div class="code-block">
+        <pre>
+        <code >
+  /* snippet from this page's styles */
+
+  ap-banner:not(:defined) {
+    opacity: 0;
+  }
+  
+  ap-banner:defined {
+    opacity: 1;
+  }
+        </code>   
+      </pre>
+      </div>
+      This approach, using the :defined pseudoselector, seems to work pretty
+      well. Obviously it would be nice if the content did need to load
+      asynchronously, but it's definitely preferable to the unstyled flash. I
+      suspect there are better ways to accomplish this, however to me, it's mark
+      against the spec to require this kind of workaround out of the box.
+      <br /><br />
+      <h4>Good stuff</h4>
+      Now that I <i>have</i> painstakingly authored this web component, it has
+      been pretty easy to drop it in <i>anywhere</i>. For instance, I placed it
+      on top of my 'flood the board' game
+      <a href="https://alexprinsen.com/rain.html" target="_blank">rain</a> to
+      describe the tech in use on that project. All I had to do was publish this
+      web component to NPM, and include a simple script tag to pull in the code
+      from a CDN:
+
+      <div class="code-block">
+        <pre>
+        <code >
+  &lt;script type="module" src="https://unpkg.com/ap-banner@0.0.6/index.js"&gt;&lt;/script&gt;
+        </code>   
+      </pre>
+      </div>
+      With that, I can drop the &lt;ap-banner /&gt; tag anywhere. That is pretty
+      slick.
+      <br /><br />
+      Now that I have a better understanding of the spec, I think my next
+      project with WebComponents will use one of the library solutions on to
+      give them a fair shot. At this point, I remain skeptical about the ideas
+      of building an entire production web application with web components.
+      <br /><br />
+      However, given their immense potential for reuse and their lack of
+      dependency on a runtime framework, I think there are definitely niches
+      where this could prove useful. For instance: organizations looking to
+      maintain a consistent look and feel throughout their web products, I think
+      WebComponents have a strong potential as the base of a Design System
+      backed Component Library.
+    </div>
   </body>
 </html>
