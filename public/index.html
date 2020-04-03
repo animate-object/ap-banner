@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script
+    <!-- <script
       type="module"
       src="https://unpkg.com/ap-banner@0.0.6/index.js"
-    ></script>
+    ></script> -->
+    <script type="module" src="/index.js"></script>
+
     <style>
       ap-banner:not(:defined) {
         opacity: 0;
@@ -20,7 +22,6 @@
         border-radius: 2px;
       }
     </style>
-    <!-- <script type="module" src="./index.js"></script> -->
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   </head>
   <body style="margin:0">
@@ -40,10 +41,10 @@
       The banner at the top of this page is a simple WebComponent. I built it
       with DOM APIs alone to get a better understanding of the spec. I'm going
       to share some of what I learned, including pain points, and rounding out
-      with good stuff. You can check out the source code for my WebComponent
+      with the good stuff. You can check out the source code for my WebComponent
       <a href="https://github.com/animate-object/ap-banner" target="_blank"
         >here</a
-      >
+      >.
 
       <br /><br />
       <h4>Web Components 101</h4>
@@ -51,19 +52,19 @@
       platform technologies (custom elements, shadow DOM, ESM, and
       templates/slots) aimed at enabling greater code reuse with native browser
       APIs.
-      <br /><br />Here's some of the big ideas behind the WebComponent spec:
+      <br /><br />Here are some of the big ideas behind the WebComponent spec:
       <ul>
         <li>
           developers can create <b>custom html elements</b> that can be reused
           like regular tags
         </li>
         <li>
-          these elements can ship with their own styling through a 'shadow dom',
-          an encapsulated sub tree that serves as the root of the element
+          elements can ship with their own styling through a 'shadow dom', an
+          encapsulated subtree that serves as the root of the element
         </li>
         <li>
           complex, customizable components can be created by combining custom
-          elements with &lt;template/&gt; and &lt;slot/&gt;
+          elements with &lt;template /&gt; and &lt;slot /&gt;
         </li>
       </ul>
       <h4>Pain points</h4>
@@ -76,11 +77,11 @@
       approaches. There are a number of libraries (bordering on frameworks) that
       make building WebComponent as breezy as authoring apps in React.
       <br /><br />
-      Another problem is the Flash of unstyle Content that seems tricky to avoid
-      -- when your WebComponent is loading asynchronously (possibly from a CDN),
-      templated content may appear unstyled before flashing into place when the
-      component has mounted. One option to mitigate this is to use some styling
-      on your host page like this:
+      Another problem is the Flash of Unstyled Content (FOUC) that seems tricky
+      to avoid -- when your WebComponent is loading asynchronously (possibly
+      from a CDN), templated content may appear unstyled before flashing into
+      place when the component has mounted. One option to mitigate this is to
+      use some styling on your host page like this:
       <div class="code-block">
         <pre>
         <code >
@@ -97,10 +98,12 @@
       </pre>
       </div>
       This approach, using the :defined pseudoselector, seems to work pretty
-      well. Obviously it would be nice if the content did need to load
+      well. Obviously it would be nice if the content did not need to load
       asynchronously, but it's definitely preferable to the unstyled flash. I
-      suspect there are better ways to accomplish this, however to me, it's mark
-      against the spec to require this kind of workaround out of the box.
+      think it's not ideal if WebComponents, with all the promise of
+      encapsulation and reuse, require changes to the host page. Perhaps there
+      are better ways to accomplish this, however to me, it's a mark against the
+      spec to require this kind of workaround out of the box.
       <br /><br />
       <h4>Good stuff</h4>
       Now that I <i>have</i> painstakingly authored this web component, it has
@@ -122,16 +125,17 @@
       slick.
       <br /><br />
       Now that I have a better understanding of the spec, I think my next
-      project with WebComponents will use one of the library solutions on to
-      give them a fair shot. At this point, I remain skeptical about the ideas
-      of building an entire production web application with web components.
-      <br /><br />
-      However, given their immense potential for reuse and their lack of
-      dependency on a runtime framework, I think there are definitely niches
-      where this could prove useful. For instance: organizations looking to
-      maintain a consistent look and feel throughout their web products, I think
-      WebComponents have a strong potential as the base of a Design System
-      backed Component Library.
+      project with WebComponents will use one of the library solutions in order
+      to give them a fair shot.
+
+      <br /><br />At this point, I remain skeptical about the ideas of building
+      an entire production web application with WebComponents. However, given
+      their immense potential for reuse and their lack of dependency on a
+      runtime framework, I think there are definitely niches where this could
+      prove useful. As an example, for organizations looking to maintain a
+      consistent look and feel throughout their web products, I think
+      WebComponents have a strong potential as the base of a design-system
+      backed component library.
     </div>
   </body>
 </html>
