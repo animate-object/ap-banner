@@ -87,12 +87,13 @@ const STYLES = `.banner,
   position: relative;
   padding: 0 16px;
   max-height: 0;
-  transition: max-height ease-in-out 250ms;
+  transition: max-height,padding ease 250ms;
   font-size: var(--font-md);
   overflow: hidden;
 }
 
 .more-info.expanded {
+  transition: max-height,padding ease 250ms;
   padding: 16px;
   max-height: 100vh;
 }

@@ -1,6 +1,6 @@
 {
   "name": "ap-banner",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "a webcomponent banner for sharing info about my projects",
   "homepage": "https://github.com/animate-object/ap-banner",
   "main": "index.js",
